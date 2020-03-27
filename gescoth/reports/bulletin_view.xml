@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<report 
+	    id = "bulletin_report_view" 
+	    model = "gescoth.bulletin" 
+	    string = "Bulletin" 
+	    report_type = "qweb-pdf" 
+	    name = "gescoth.eleve_bulletin_report_view" 
+	    file = "gescoth.eleve_bulletin_report_view"
+	    
+	/>
+
+	<template id="eleve_bulletin_report_view">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+				<style type="text/css">
+					table{
+						border-radius: 1em;
+					}
+					.MyTable {
+						border-collapse:collapse;
+						border:1px solid black;
+						width: 100%;
+					}
+					thead{
+						border-color: lightgray
+					}
+					.MyTable td {
+						border:1px solid black;
+						border-bottom : 0px;
+						border-top: 0px;
+						margin-left: 150px;
+					}
+					.MyTable tr{
+						border-bottom : 0px;
+						border-top: 0px;
+					}
+					.MyTable th{
+						border:1px solid black;
+					}
+					.entete {
+						text-align: center;
+					}
+					.img{
+						width: 200px;
+						height: 150px;
+					}
+					.montant{
+						text-align: right;
+					}
+					.company{
+						font-size: 22px;
+						font-weight: bold;
+					}
+					.text-center{
+						text-align: center;
+					}
+					.rubrique{
+						font-size: 20;
+					}
+					.effectif{
+						width: 50%;
+					}
+				</style>
+                <div class="page">
+                    <h4>BULLETIN DE NOTE</h4>
+                    <P>Premier semestre</P>
+                    <table class="MyTable effectif">
+						<thead>
+							<tr>
+								<th>Classe</th><th>Effectif</th><th>Sexe</th><th>Statut</th><th>Ann.scolaire</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><span t-field="o.eleve_id.classe"/></td>
+								<td><span t-esc="len(o.eleve_id.classe.eleve_ids)"/></td>
+								<td><span t-field="o.eleve_id.sexe"/></td>
+								<td><span t-field="o.eleve_id.statut"/></td>
+								<td><span t-esc="o.annee_scolaire.name"/></td>
+							</tr>
+						</tbody>
+					</table>
+                    <p>Nom et prénom(s) : <span t-field="o.eleve_id.nom_eleve" /></p>
+                    <table class="MyTable">
+						<thead>
+							<tr>
+								<th>Matière</th><th>Moy Classe</th><th>Note de compo</th><th>Moy. Sem.</th><th>Coef</th>
+								<th>Note Coef.</th><th>Rang</th><th>Professeur</th><th>Appréciation</th><th>Signature</th>
+							</tr>
+						</thead>
+						<tbody>
+							<t t-foreach="o.note_ids" t-as="note">
+								<tr>
+									<t t-set="mysem" t-value="note.moyenne * note.coeficient_id.coef"/>
+									<td><span t-field="note.coeficient_id.matiere" /></td>
+									<td class="text-center"><span t-field="note.moy_classe" /></td>
+									<td class="text-center"><span t-field="note.note_compo" /></td>
+									<td class="text-center"><span t-field="note.moyenne" /></td>
+									<td class="text-center"><span t-field="note.coeficient_id.coef" /></td>
+									<td class="text-center"><span t-esc="round(mysem, 2)" /></td>
+									<td><span t-field="note.rang" /></td>
+									<td><span t-field="note.coeficient_id.professeur_id.name" /></td>
+									<td><span t-field="note.appreciation" /></td>
+									<td></td>
+								</tr>
+							</t>
+						</tbody>
+					</table>
+					<p style="page-break-before:always;"> </p>
+					<!-- <p style="page-break-after:always;"></p> -->
+                </div> 
+			</t>
+		</t>
+	</template>
+</odoo>

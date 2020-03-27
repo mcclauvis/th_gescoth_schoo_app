@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<template id="liste_eleve_form_view">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+				<h1><span t-field="o.name"/></h1>
+			</t>
+		</t>
+	</template>
+
+	<record model="ir.ui.view" id="liste_eleve_form_view">
+		<field name="name">assistant.liste.eleve</field>
+		<field name="model">gescoth.liste.eleve</field>
+		<field name="arch" type="xml">
+			<form string="Liste des élèves">
+				<group>
+					<field name ="classe_id"/>
+				</group>
+				<footer>
+					<button name="Imprimer" type="object" string="Imprimer" class="oe_highlight" />
+					ou
+					<button special="cancel" string="Annuler"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="assistant_liste_des_eleve" model="ir.actions.act_window">
+		<field name="name">Impression de la liste des élèves</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">gescoth.liste.eleve</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="liste_eleve_form_view"/>
+		<field name="target">new</field>
+	</record>
+	<menuitem 
+			id="gescoth_liste_eleve" 
+			parent="gescoth_eleve_menu" 
+			name="Imprimer liste des élèves"
+			action="assistant_liste_des_eleve"
+			/>
+
+</odoo>

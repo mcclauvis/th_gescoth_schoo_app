@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="gescoth_paiement_eleve_menu_action" model="ir.actions.act_window">
+			<field name="name">Paiement</field>
+			<field name="res_model">gescoth.paiement.eleve</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,kanban</field>
+			<field name="domain">[]</field>
+			<field name="help" type="html">
+				<p class="oe_view_noconten_create">
+					Enregistrer les paiements de élèves ici
+				</p>
+				<i>
+					Cliquez sur le bonton créer pour enregistrer paiement
+				</i>
+			</field>
+		</record>
+
+		 <record id="gescoth_eleve_payement_tree_view" model="ir.ui.view">
+			<field name="name">Paiement Tree</field>
+			<field name="model">gescoth.paiement.eleve</field>
+			<field name="arch" type="xml">
+				<tree string="Student">
+					<field name="numer_recu"/>
+					<field name="eleve_id"/>
+					<field name="date_paiement"/>
+					<field name="montant"/>
+					<field name="recu_manuel"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="payement_form_view">
+	        <field name="name">Paiement</field>
+	        <field name="model">gescoth.paiement.eleve</field>
+	        <field name="arch" type="xml">
+	            <form string="Payement">
+	            	<header>
+	            		<button name="confirmer_paiement" string="Confirmer" type="object"/>
+	            	</header>
+	            	<sheet>
+	            		<div>
+	            			<h1><field name="numer_recu"/></h1>
+	            		</div>
+	            		<group>
+	            			<group>
+								<field name="eleve_id"/>
+								<field name="date_paiement"/>
+	            			</group>
+	            			<group>
+	            				<field name="montant"/>
+								<field name="recu_manuel"/>
+	            			</group>
+		            	</group>
+	            	</sheet>
+	            </form>
+	        </field>
+	    </record>
+
+	    <record id="gescoth_trache_eleve_menu_action" model="ir.actions.act_window">
+			<field name="name">Tranches de paiement</field>
+			<field name="res_model">gescoth.tranche</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[]</field>
+			<field name="help" type="html">
+				<p class="oe_view_noconten_create">
+					Enregistrement les payements par tranche
+				</p>
+			</field>
+		</record>
+
+		<record id="gescoth_tranche_tree_view" model="ir.ui.view">
+			<field name="name">Tranche Tree</field>
+			<field name="model">gescoth.tranche.line</field>
+			<field name="arch" type="xml">
+				<tree string="Student" editable="top">
+					<field name="date_echeanche"/>
+					<field name="montant"/>
+					<field name="tranche_id"/>
+					<field name="paye"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="tranche_form_view">
+	        <field name="name">Tranches de paiement</field>
+	        <field name="model">gescoth.tranche</field>
+	        <field name="arch" type="xml">
+	            <form string="Tranche">
+	            	<header>
+	            		<button name="calculer_tranche" class="oe_highlight" string="Calculer les tranche" type="object"/>
+	            	</header>
+	            	<sheet>
+	                	<group>
+		                	<group>
+								<field name="eleve_id"/>
+								<field name="date"/>
+								<field name="date_premier_tranche"/>
+		                	</group>
+		                	<group>
+								<field name="montant"/>
+								<field name="nombre"/>
+		                		<field name="montat_deja_paye"/>
+		                	</group>
+		                </group>
+			            <notebook>
+			                <page string="Tableau de tranche">
+			                	<field name="line_ids" readonly="1"/>
+			                </page>
+	                	</notebook>
+	                </sheet>
+	            </form>
+	        </field>
+	    </record>
+
+		<record id="gescoth_trache_line_menu_action" model="ir.actions.act_window">
+			<field name="name">Ligne de tranche</field>
+			<field name="res_model">gescoth.tranche.line</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[]</field>
+			<field name="help" type="html">
+				<p class="oe_view_noconten_create">
+					Enregistrement les payements par tranche
+				</p>
+			</field>
+		</record>
+
+		<record id="gescoth_tranche_line_tree_view" model="ir.ui.view">
+			<field name="name">Line Tree</field>
+			<field name="model">gescoth.tranche</field>
+			<field name="arch" type="xml">
+				<tree string="Tranche de payement">
+					<field name="eleve_id"/>
+					<field name="date"/>
+					<field name="date_premier_tranche"/>
+					<field name="montant"/>
+					<field name="nombre"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="tranche_ligne_form_view">
+	        <field name="name">Tranche form</field>
+	        <field name="model">gescoth.tranche.line</field>
+	        <field name="arch" type="xml">
+	            <form string="Linge de tranche">
+	            	<header>
+	            		<button name="Payer_la_trache" class="oe_highlight" string="Payer la tranche" type="object"/>
+	            	</header>
+	            	<sheet>
+	                	<group>
+		                	<group>
+								<field name="date_echeanche"/>
+								<field name="montant"/>
+								<field name="tranche_id"/>
+								<field name="paye"/>
+		                	</group>
+		                </group>
+	                </sheet>
+	            </form>
+	        </field>
+	    </record>
+
+		<menuitem 
+			id="gescoth_finance_menu" 
+			parent="gescoth_menu" 
+			name="Finance"
+			/>
+		<menuitem 
+			id="gescoth_finance_paiement_eleve_menu" 
+			parent="gescoth_finance_menu" 
+			name="Paiement des élèves"
+			action="gescoth_paiement_eleve_menu_action"
+			/>
+		<menuitem 
+			id="gescoth_finance_trancge_eleve_menu" 
+			parent="gescoth_finance_menu" 
+			name="Paiement par tranche"
+			action="gescoth_trache_eleve_menu_action"
+			/>
+		<!-- <menuitem 
+			id="gescoth_finance_trancge_line_eleve_menu" 
+			parent="gescoth_finance_menu" 
+			name="Linge de tranche"
+			action="gescoth_trache_line_menu_action"
+			/> -->
+	</data>
+</odoo>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="gescoth_eleve_menu_action" model="ir.actions.act_window">
+			<field name="name">Elèves</field>
+			<field name="res_model">gescoth.eleve</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,kanban</field>
+			<field name="domain">[]</field>
+			<field name="help" type="html">
+				<p class="oe_view_noconten_create">
+					Créez votre premier élève
+				</p>
+				<i>
+					Cliquez sur le bonton créer pour enregistrer un élève
+				</i>
+			</field>
+		</record>
+
+
+		<record id="eleve_kanban_view" model="ir.ui.view">
+			<field name="name">gescoth.eleve.kanban</field>
+			<field name="model">gescoth.eleve</field>
+			<field name="arch" type="xml">
+				<kanban>
+					<field name="id"/>
+					<field name="photo"/>
+					<field name="name"/>
+					<templates>
+						<t t-name="kanban-box">
+							<div>
+								<h1><field name="name"/></h1>
+							</div>
+						</t>
+					</templates>
+				</kanban>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="eleve_form_view">
+	        <field name="name">Elève</field>
+	        <field name="model">gescoth.eleve</field>
+	        <field name="arch" type="xml">
+	            <form string="Elève">	
+	            	<header>
+	            		<button name="%(gescoth.assistant_ajouter_absence_eleve)d" string="Ajouter une absence" type="action" class="oe_highlight"/>
+	            	</header>            	
+	                <sheet>
+                		<div class="oe_button_box" name="button_box">
+                			<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                				<field name="active" widget="boolean_button"/>
+                			</button>
+                		</div>
+            			<field name="photo" widget="image" class="oe_avatar oe_right"/>
+            			<h1><field name="name"/></h1>
+	                	<group>	            
+		                	<group>
+		                		<h2><field name="nom_eleve" placeholder="Nom et prénom(s)"/></h2>
+								<field name="date_naissance"/>
+								<field name="lieu_naissance"/>
+								<field name="sexe"/>
+								<field name="telephone"/>
+		                	</group>
+		                	<group>
+		                		<field name="email"/>
+								<field name="adresse"/>
+								<field name="classe"/>
+								<field name="statut"/>
+								<field name="Apt_sport"/>
+		                	</group>
+		                </group>
+	                </sheet>
+	                <div class="oe_chatter">
+	                    <field name="message_follower_ids" widget="mail_followers"/>
+	                    <field name="activity_ids" widget="mail_activity"/>
+	                    <field name="message_ids" widget="mail_thread"/>
+	                </div>
+	            </form>
+	        </field>
+	    </record>
+
+
+	    <record id="gescoth_eleve_tree_view" model="ir.ui.view">
+			<field name="name">Eleve Tree</field>
+			<field name="model">gescoth.eleve</field>
+			<field name="arch" type="xml">
+				<tree string="Student">
+					<field name="name" widget="handle" groups="base.group_no_one"/>
+					<field name="nom_eleve"/>
+					<field name="date_naissance"/>
+					<field name="lieu_naissance"/>
+					<field name="sexe"/>
+					<field name="telephone"/>
+					<field name="Apt_sport"/>
+				</tree>
+			</field>
+		</record>
+
+
+		<menuitem 
+			id="gescoth_menu" 
+			name="GescoTh" 
+			web_icon="gescoth,static/description/icon.png"/>
+		<menuitem 
+			id="gescoth_eleve_menu" 
+			parent="gescoth_menu" 
+			name="Elève"
+			/>
+		<menuitem 
+			id="gescoth_eleve_inscription_menu" 
+			parent="gescoth_eleve_menu" 
+			name="Inscription"
+			action="gescoth_eleve_menu_action"/>
+
+		<menuitem 
+			id="gescoth_creer_absence" 
+			parent="gescoth_eleve_menu" 
+			name="Ajouter une absence"
+			action="assistant_ajouter_absence_eleve"
+			/>
+
+	</data>
+</odoo>

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="gescoth_matiere_menu_action" model="ir.actions.act_window">
+			<field name="name">Matière</field>
+			<field name="res_model">gescoth.matiere</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[]</field>
+			<field name="help" type="html">
+				<p class="oe_view_noconten_create">
+					Créez votre première matière
+				</p>
+			</field>
+		</record>
+
+		<record id="gescoth_professeur_menu_action" model="ir.actions.act_window">
+			<field name="name">Professeur</field>
+			<field name="res_model">gescoth.professeur</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[]</field>
+			<field name="help" type="html">
+				<p class="oe_view_noconten_create">
+					Créez votre premier professeur
+				</p>
+			</field>
+		</record>
+
+		<record id="gescoth_filiere_menu_action" model="ir.actions.act_window">
+			<field name="name">Filière</field>
+			<field name="res_model">gescoth.filiere</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[]</field>
+			<field name="help" type="html">
+				<p class="oe_view_noconten_create">
+					Créez votre première filière
+				</p>
+			</field>
+		</record>
+
+
+		<record id="gescoth_classe_menu_action" model="ir.actions.act_window">
+			<field name="name">Classe</field>
+			<field name="res_model">gescoth.classe</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[]</field>
+			<field name="help" type="html">
+				<p class="oe_view_noconten_create">
+					Créez votre première classe
+				</p>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="matiere_form_view">
+	        <field name="name">Matière</field>
+	        <field name="model">gescoth.matiere</field>
+	        <field name="arch" type="xml">
+	            <form string="Matière"> 
+	            	<sheet>
+	            		<group>
+							<field name="name"/>
+							<field name="nom_abrege"/>
+							<field name="user_abrege"/>
+		            	</group>
+	            	</sheet>
+	            </form>
+	        </field>
+	    </record>
+
+	    <record id="gescoth_anneescolaire_menu_action" model="ir.actions.act_window">
+			<field name="name">Année scolaire</field>
+			<field name="res_model">gescoth.anneescolaire</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[]</field>
+			<field name="help" type="html">
+				<p class="oe_view_noconten_create">
+					Créez votre première année scolaire
+				</p>
+			</field>
+		</record>
+
+	    <record model="ir.ui.view" id="professeur_form_view">
+	        <field name="name">Professeur</field>
+	        <field name="model">gescoth.professeur</field>
+	        <field name="arch" type="xml">
+	            <form string="Matière"> 
+	            	<sheet>
+                		<h1><field name="name" placeholder="Nom et prénom(s)"/></h1>
+	                	<group>
+	                		<field name="photo" widget="image" class="oe_avatar oe_right"/>
+		                	<group>
+								<field name="date_naissance"/>
+								<field name="lieu_naissance"/>
+								<field name="sexe"/>
+								<field name="telephone"/>
+		                	</group>
+		                	<group>
+		                		<field name="email"/>
+								<field name="adresse"/>
+								<field name="date_service"/>
+								<field name="statut"/>
+		                	</group>
+		                </group>
+			            <notebook>
+			                <page string="Matières enseignées">
+			                	<field name="matieres"/>
+			                </page>
+	                	</notebook>
+	                </sheet>
+	                <div class="oe_chatter">
+	                    <field name="message_follower_ids" widget="mail_followers"/>
+	                    <field name="activity_ids" widget="mail_activity"/>
+	                    <field name="message_ids" widget="mail_thread"/>
+	                </div>
+	            </form>
+	        </field>
+	    </record>
+
+	    <record model="ir.ui.view" id="filiere_form_view">
+	        <field name="name">Filière</field>
+	        <field name="model">gescoth.filiere</field>
+	        <field name="arch" type="xml">
+	            <form string="Filière"> 
+	            	<sheet>
+	            		<group>
+							<field name="name"/>
+							<field name="specialite"/>
+		            	</group>
+		            	<notebook>
+		            		<page string="Liste des classe">
+		            			<tree>
+		            				<field name="classe_ids"/>
+		            			</tree>
+		            		</page>
+		            	</notebook>
+	            	</sheet>
+	            </form>
+	        </field>
+	    </record>
+
+	    <record id="gescoth_matiere_tree_view" model="ir.ui.view">
+			<field name="name">Matiere Tree</field>
+			<field name="model">gescoth.matiere</field>
+			<field name="arch" type="xml">
+				<tree string="Student">
+					<field name="name"/>
+					<field name="nom_abrege"/>
+					<field name="user_abrege"/>
+				</tree>
+			</field>
+		</record>
+
+
+ 		<record id="gescoth_professeur_tree_view" model="ir.ui.view">
+			<field name="name">Professeur Tree</field>
+			<field name="model">gescoth.professeur</field>
+			<field name="arch" type="xml">
+				<tree string="Professeur">
+					<field name="name"/>
+					<field name="date_naissance"/>
+					<field name="lieu_naissance"/>
+					<field name="sexe"/>
+					<field name="telephone"/>
+					<field name="email"/>
+					<field name="adresse"/>
+					<field name="statut"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="gescoth_filiere_tree_view" model="ir.ui.view">
+			<field name="name">Filiere Tree</field>
+			<field name="model">gescoth.filiere</field>
+			<field name="arch" type="xml">
+				<tree string="Student">
+					<field name="name"/>
+					<field name="specialite"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="classe_form_view">
+	        <field name="name">Classe</field>
+	        <field name="model">gescoth.classe</field>
+	        <field name="arch" type="xml">
+	            <form string="Classe"> 
+	            	<sheet>
+	            		<group>
+							<field name="name"/>
+							<field name="description"/>
+							<field name="filiere"/>
+							<field name="professeur"/>
+		            	</group>
+		            	<notebook>
+		            		<page string="Liste des élèves">
+		            			<field name="eleve_ids"/>
+		            		</page>
+		            		<page string="Matières">
+		            			<tree>
+		            				<field name="coeficient_ids"/>
+		            			</tree>
+		            		</page>
+		            	</notebook>
+	            	</sheet>
+	            </form>
+	        </field>
+	    </record>
+
+
+	    <record id="gescoth_classe_tree_view" model="ir.ui.view">
+			<field name="name">Classe Tree</field>
+			<field name="model">gescoth.classe</field>
+			<field name="arch" type="xml">
+				<tree string="Student">
+					<field name="name"/>
+					<field name="filiere"/>
+					<field name="professeur"/>
+					<field name="description"/>
+				</tree>
+			</field>
+		</record>
+
+		<menuitem 
+			id="gescoth_ecole_menu" 
+			parent="gescoth_menu" 
+			name="Ecole"
+			/>
+
+		<menuitem 
+			id="gescoth_matiere_menu" 
+			parent="gescoth_ecole_menu" 
+			name="Matière"
+			action="gescoth_matiere_menu_action"
+			/>
+
+		<menuitem 
+			id="gescoth_professeur_menu" 
+			parent="gescoth_ecole_menu" 
+			name="Professeur"
+			action="gescoth_professeur_menu_action"
+			/>
+
+		<menuitem 
+			id="gescoth_filiere_menu" 
+			parent="gescoth_ecole_menu" 
+			name="Filière"
+			action="gescoth_filiere_menu_action"
+			/>
+		<menuitem 
+			id="gescoth_classe_menu" 
+			parent="gescoth_ecole_menu" 
+			name="Classe"
+			action="gescoth_classe_menu_action"
+			/>
+		<menuitem 
+			id="gescoth_anneescolaire_menu" 
+			parent="gescoth_ecole_menu" 
+			name="Année scolaire"
+			action="gescoth_anneescolaire_menu_action"
+			/>
+	</data>
+</odoo>

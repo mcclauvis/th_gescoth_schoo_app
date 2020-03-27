@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	
+	<record model="ir.ui.view" id="absence_form_view">
+		<field name="name">assistant.ajouter.absence.eleve</field>
+		<field name="model">gescoth.absence</field>
+		<field name="arch" type="xml">
+			<form string="Ajouter une absence">
+				<group>
+					<field name ="eleve_id"/>
+					<field name ="date_absence"/>
+					<field name ="nbr_heure"/>
+				</group>
+				<footer>
+					<button name="ajouter_absence_eleve" type="object" string="Enregister" class="oe_highlight" />
+					ou
+					<button special="cancel" string="Annuler"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="assistant_ajouter_absence_eleve" model="ir.actions.act_window">
+		<field name="name">Enregistrer une absence</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">gescoth.absence</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="absence_form_view"/>
+		<field name="target">new</field>
+	</record>
+</odoo>
