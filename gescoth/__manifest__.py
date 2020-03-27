@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name' : 'GescoTh',
-    'version' : '12.1.0',
+    'version' : '01',
     'summary' : """
         Module de gestion complète de école secondaire
     """,
@@ -30,7 +30,7 @@
     ],
 
     'images' : [],
-    # 'licence' : 'LGPL-3',
+    'licence' : 'GPL-3',
     'installable' : True,
     'application' : True,
     'auto_install' : False,
