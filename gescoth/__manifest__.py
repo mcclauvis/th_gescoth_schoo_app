@@ -30,7 +30,7 @@
     ],
 
     'images' : [],
-    'licence' : 'AGPL-5',
+    'licence' : 'AGPL-3',
     'installable' : True,
     'application' : True,
     'auto_install' : False,
