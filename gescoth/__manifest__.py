@@ -30,7 +30,7 @@
     ],
 
     'images' : [],
-    'licence' : 'GPL-3',
+    'license' : 'LGPL-3',
     'installable' : True,
     'application' : True,
     'auto_install' : False,
